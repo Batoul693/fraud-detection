@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row mb-4">
+    <div class="col text-center">
+        <h1 class="fw-bold text-primary">Batch Fraud Analysis</h1>
+    </div>
+</div>
+
+<!-- MODEL SELECTION CARD -->
+<div class="card card-custom p-4 mb-4">
+    <form method="post" class="row align-items-center g-3">
+
+        <div class="col-lg-4">
+            <label class="fw-semibold mb-2">Select Detection Model</label>
+            <select name="selected_model" class="form-select">
+                <option value="RandomForest" {% if selected_model == 'RandomForest' %}selected{% endif %}>
+                    Random Forest
+                </option>
+                <option value="XGBoost" {% if selected_model == 'XGBoost' %}selected{% endif %}>
+                    XGBoost
+                </option>
+            </select>
+        </div>
+
+        <div class="col-lg-3 d-grid">
+            <button type="submit" class="btn btn-primary fw-bold mt-lg-4">
+                Run Full Analysis
+            </button>
+        </div>
+
+        {% if results %}
+        <div class="col-lg-3 d-grid">
+            <!-- This button link it to  CSV route -->
+            <a href="/download_csv?model={{ selected_model }}" class="btn btn-outline-dark fw-bold mt-lg-4">
+                Download CSV
+            </a>
+        </div>
+        {% endif %}
+
+    </form>
+</div>
+
+{% if results %}
+
+<!-- SUMMARY SECTION -->
+<div class="row mb-4 text-center">
+
+    <div class="col-md-4 mb-3">
+        <div class="card card-custom p-4">
+            <h6 class="text-muted">Total Transactions</h6>
+            <h3 class="fw-bold">{{ results|length }}</h3>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card card-custom p-4">
+            <h6 class="text-muted text-danger">Fraud Cases</h6>
+            <h3 class="fw-bold text-danger">
+                {{ results | selectattr("prediction", "equalto", "FRAUD") | list | length }}
+            </h3>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card card-custom p-4">
+            <h6 class="text-muted text-success">Safe Transactions</h6>
+            <h3 class="fw-bold text-success">
+                {{ results | selectattr("prediction", "equalto", "SAFE") | list | length }}
+            </h3>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+    <div class="card card-custom p-4">
+        <h6 class="text-muted text-warning">Suspicious Cases</h6>
+        <h3 class="fw-bold text-warning">
+            {{ results | selectattr("prediction", "equalto", "SUSPICIOUS") | list | length }}
+        </h3>
+    </div>
+</div>
+
+
+</div>
+
+<!-- TABLE -->
+<div class="card card-custom p-4">
+    <div class="table-responsive">
+        <table class="table align-middle text-center">
+
+            <thead class="table-primary fw-bold">
+                <tr>
+                    <th>ID</th>
+                    <th>Amount ($)</th>
+                    <th>Hour</th>
+                    <th>Probability</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for row in results %}
+                <tr>
+                    <td class="fw-semibold">{{ row.id }}</td>
+                    <td>${{ row.amount }}</td>
+                    <td>{{ row.hour }}</td>
+                    <td class="fw-bold text-primary">
+                        {{ (row.probability * 100)|round(2) }}%
+                    </td>
+                    <td>
+                        {% if row.prediction == "FRAUD" %}
+                            <span class="badge bg-danger px-3 py-2">🚨 FRAUD</span>
+                        {% elif row.prediction == "SUSPICIOUS" %}
+                            <span class="badge bg-warning text-dark px-3 py-2">⚠️ SUSPICIOUS</span>
+                        {% else %}
+                            <span class="badge bg-success px-3 py-2">✅ SAFE</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}

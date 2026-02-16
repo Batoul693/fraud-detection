@@ -1,0 +1,210 @@
+/* ===== Global ===== */
+:root {
+    --primary-bg: #f4f7fc;
+    --card-bg: #ffffff;
+    --text-dark: #2c3e50;
+    --text-muted: #7f8c8d;
+    --accent-blue: #2c3e50;
+    --accent-cyan: #17a2b8;
+    --danger: #dc3545;
+    --success: #198754;
+    --bank-blue: #1a237e;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(to bottom right, #f5f7fa, #e4ecf7);
+    background-color: var(--primary-bg);
+}
+
+/* ===== Navbar ===== */
+.custom-navbar {
+    background: linear-gradient(90deg, #0b1f3a, #112f5f);
+}
+
+.navbar-brand {
+    letter-spacing: 1px;
+}
+
+.nav-link {
+    color: #dbe6ff !important;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ffffff !important;
+    transform: translateY(-1px);
+}
+
+/* ===== Dashboard Header ===== */
+.dashboard-header {
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 15px;
+}
+
+/* ===== KPI Cards ===== */
+.kpi-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
+    overflow: hidden;
+}
+
+.kpi-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.08);
+}
+
+.kpi-header {
+    background-color: #f8f9fa;
+    padding: 15px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ===== Metrics ===== */
+.metric-box {
+    padding: 15px;
+    text-align: center;
+}
+
+.metric-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.metric-value {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.threshold-badge {
+    background-color: #eef2f7;
+    color: var(--text-dark);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* ===== Professional Donut ===== */
+.fraud-donut {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    /* 1.5% makes the red visible, bank-blue fills the rest */
+    background: conic-gradient(var(--danger) 0% 1.5%, var(--bank-blue) 1.5% 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: 0;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+}
+
+.fraud-donut::before {
+    content: "";
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: var(--card-bg);
+    border-radius: 50%;
+}
+
+.donut-text {
+    position: relative;
+    z-index: 1;
+    font-weight: 800;
+    font-size: 0.85rem;
+    color: var(--danger);
+}
+
+/* ===== Bar Chart ===== */
+.bar-chart-wrapper {
+    padding: 20px;
+    background: var(--card-bg);
+    overflow-x: auto; /* Allows scrolling on small screens */
+}
+
+.bar-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 220px;
+    min-width: 500px;
+    padding-top: 20px;
+    border-bottom: 2px solid #eee;
+}
+
+.bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    flex: 1;
+    margin: 0 2px;
+}
+
+.risk-bar {
+    width: 75%;
+    border-radius: 4px 4px 0 0;
+    transition: all 0.4s ease-out;
+    cursor: pointer;
+    position: relative;
+    min-height: 4px;
+}
+
+.risk-bar:hover {
+    filter: brightness(1.15);
+}
+
+/* Hover Tooltip for Bars */
+.risk-bar:hover::after {
+    content: attr(data-risk);
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text-dark);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    white-space: nowrap;
+    z-index: 100;
+}
+
+.hour-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+/* ===== Helper Utilities ===== */
+.text-cyan {
+    color: var(--accent-cyan) !important;
+}
+.chart-container {
+    padding: 20px;
+}
+.chart-img {
+    border-radius: 8px;
+    transition: opacity 0.3s;
+}
