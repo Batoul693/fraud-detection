@@ -1,12 +1,59 @@
 import os
+import smtplib
 import pandas as pd
 import numpy as np
 import joblib
 from flask import Flask, render_template, request, redirect, url_for, session, send_file
 from io import BytesIO
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from dotenv import load_dotenv
+
+load_dotenv()
+EMAIL_USER = os.getenv("EMAIL_USER")
+EMAIL_PASS = os.getenv("EMAIL_PASS")
+BANK_EMAIL = os.getenv("BANK_EMAIL")
+def send_fraud_alert(amount, probability, model_used, transaction_time):
+    sender_email = EMAIL_USER
+    receiver_email = BANK_EMAIL
+    app_password = EMAIL_PASS
+
+    message = MIMEMultipart()
+    message["From"] = sender_email
+    message["To"] = receiver_email
+    message["Subject"] = "🚨 URGENT: High-Risk Transaction Flagged - Account Frozen"
+
+    body = f"""
+HIGH-RISK FRAUD DETECTED
+Date: [Current Date]
+Priority: CRITICAL
+Model Used: {model_used}
+Amount: ${amount}
+Fraud Probability: {probability}%
+Time: {transaction_time}
+
+The system triggered this alert based on the high-value rule:
+Amount >= $500 AND Probability >= 90%
+Please login to the Admin Dashboard to review the case.
+AI Fraud Detection System
+"""
+
+    message.attach(MIMEText(body, "plain"))
+
+    try:
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+        server.login(sender_email, app_password)
+        server.send_message(message)
+        server.quit()
+        print("Fraud alert email sent successfully.")
+    except Exception as e:
+        print("Error sending email:", e)
+
+
 
 app = Flask(__name__)
-app.secret_key = 'batol_secret_key_123'
+app.secret_key = 'batoul_secret_key_123'
 
 # ===================== LOAD DATA & MODELS =====================
 DATA_DIR = 'data'
@@ -118,6 +165,20 @@ def predict():
             else:
                 status = "SAFE"
 
+            amount = df_sample.iloc[row_id].get('Amount', 0)
+            prob_percent = round(prob * 100, 2)
+
+            if (
+                amount >= 500 and
+                prob >= 0.90
+            ):
+                send_fraud_alert(
+                    amount=amount,
+                    probability=prob_percent,
+                    model_used=selected_model,
+                    transaction_time=hour
+                )                
+
             results = [{
                 'model': selected_model,
                 'probability': prob,
@@ -161,6 +222,20 @@ def batch():
                     status = "SUSPICIOUS"
                 else:
                     status = "SAFE"
+
+                amount = row.get('Amount', 0)
+                prob_percent = round(prob * 100, 2)
+
+                if (
+                    amount >= 500 and
+                    prob >= 0.90
+                ):
+                    send_fraud_alert(
+                        amount=amount,
+                        probability=prob_percent,
+                        model_used=selected_model,
+                        transaction_time=hour
+                    )
 
                 batch_results.append({
                     'id': index,
