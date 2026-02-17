@@ -1,2 +1,4 @@
 creditcard.csv
 .env
+*env
+*.env
