@@ -14,8 +14,8 @@ EMAIL_USER = os.getenv("EMAIL_USER")
 EMAIL_PASS = os.getenv("EMAIL_PASS")
 BANK_EMAIL = os.getenv("BANK_EMAIL")
 def send_fraud_alert(amount, probability, model_used, transaction_time):
-    sender_email = EMAIL_USER
-    receiver_email = BANK_EMAIL
+    sender_email = BANK_EMAIL
+    receiver_email = EMAIL_USER
     app_password = EMAIL_PASS
 
     message = MIMEMultipart()
@@ -25,7 +25,6 @@ def send_fraud_alert(amount, probability, model_used, transaction_time):
 
     body = f"""
 HIGH-RISK FRAUD DETECTED
-Date: [Current Date]
 Priority: CRITICAL
 Model Used: {model_used}
 Amount: ${amount}
@@ -34,8 +33,11 @@ Time: {transaction_time}
 
 The system triggered this alert based on the high-value rule:
 Amount >= $500 AND Probability >= 90%
+Immediate manual investigation is recommended.
 Please login to the Admin Dashboard to review the case.
+____________
 AI Fraud Detection System
+Internal Risk Monitoring Unit
 """
 
     message.attach(MIMEText(body, "plain"))
@@ -53,7 +55,7 @@ AI Fraud Detection System
 
 
 app = Flask(__name__)
-app.secret_key = 'batoul_secret_key_123'
+app.secret_key = 'admin_secret_key_123'
 
 # ===================== LOAD DATA & MODELS =====================
 DATA_DIR = 'data'
@@ -183,7 +185,8 @@ def predict():
                 'model': selected_model,
                 'probability': prob,
                 'prediction': status,
-                'hour': hour
+                'hour': hour,
+                'amount': amount
             }]
 
         except Exception as e:
