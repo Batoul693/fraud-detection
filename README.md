@@ -1,9 +1,9 @@
-# 🛡️ Fraud Detection System
+#  Fraud Detection System
 
-## 📌 Project Overview
+##  Project Overview
 This project is a comprehensive Machine Learning web application built with Flask, designed to detect fraudulent credit card transactions. It bridges the gap between raw data science and practical banking operations. By utilizing advanced classification algorithms (XGBoost & Random Forest), the system provides a robust, real-time investigation tool tailored for bank fraud analysts.
 
-## ✨ Key Features
+##  Key Features
 - **Two-Threshold Three-Tier Classification** :
  | Status | 🟢 SAFE | 🟡 SUSPICIOUS | 🔴 FRAUD |
 | :--- | :--- | :--- | :--- |
@@ -17,13 +17,13 @@ This project is a comprehensive Machine Learning web application built with Flas
 - **Single & Batch Processing:** Real-time analysis + bulk CSV upload
 - **Secure:** `.env` file (Git ignored) for email credentials
 
-## 🧠 Model Training & Insights
+##  Model Training & Insights
 - **XGBoost** (primary, scale_pos_weight for imbalance)
 - **Random Forest** (SMOTE preprocessing)
 - **Threshold:** 0.83 for XBG/0.36 for RF 
 
 
-## ⚙️ Installation & Setup
+##  Installation & Setup
 ```bash
 git clone https://github.com/Batoul693/fraud-detection.git
 cd fraud-detection
