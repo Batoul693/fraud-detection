@@ -1,35 +1,31 @@
-#  Fraud Detection System
-
-##  Project Overview
+## Project Overview 
 This project is a comprehensive Machine Learning web application built with Flask, designed to detect fraudulent credit card transactions. It bridges the gap between raw data science and practical banking operations. By utilizing advanced classification algorithms (XGBoost & Random Forest), the system provides a robust, real-time investigation tool tailored for bank fraud analysts.
-
 ##  Key Features
-- **Two-Threshold Three-Tier Classification** :
- | Status | 🟢 SAFE | 🟡 SUSPICIOUS | 🔴 FRAUD |
-| :--- | :--- | :--- | :--- |
-| **Action** | Approve | Manual Review (Yellow Alert) | Auto-Freeze & Bank Alert |
-| **XGBoost Logic** | Prob < 0.15 | 0.15 ≤ Prob < 0.83 | Prob ≥ 0.83 |
-| **Random Forest Logic** | Prob < 0.10 | 0.10 ≤ Prob < 0.36 | Prob ≥ 0.36 |
+- **Three-Tier Risk Classification**
+  - 🟢 Safe (Automatic Approval)
+  - 🟡 Suspicious (Manual Review Required)
+  - 🔴 Fraud ( Freeze & Bank Alert)
 
-- **Smart Email Alerts:** `Prob ≥ 90% AND Amount > $500`
-- **Datasets:** `fraud_small_sample.csv` (website testing), `creditcard.csv` (model training)
-- **Smart Email Alerts:** ONLY for `Probability >= 90% AND Amount > $500`
-- **Single & Batch Processing:** Real-time analysis + bulk CSV upload
-- **Secure:** `.env` file (Git ignored) for email credentials
+- **Dual-Model Architecture**
+  - **XGBoost** (Primary production model – optimized with `scale_pos_weight`)
+  - **Random Forest** (SMOTE-enhanced comparative model)
+  - Dynamic model switching for performance comparison
 
-##  Model Training & Insights
-- **XGBoost** (primary, scale_pos_weight for imbalance)
-- **Random Forest** (SMOTE preprocessing)
-- **Threshold:** 0.83 for XBG/0.36 for RF 
+- **Intelligent Alert System**
+  - Email alerts triggered when:
+    - `Fraud Probability ≥ 90%`
+    - `Transaction Amount > $500`
 
+- **Real-Time & Batch Processing**
+  - Single transaction prediction
+  - Bulk CSV file upload and analysis
 
-##  Installation & Setup
-```bash
-git clone https://github.com/Batoul693/fraud-detection.git
-cd fraud-detection
-pip install -r requirements.txt
-create .env:
-EMAIL_USER=user_email@gmail.com
-EMAIL_PASS=the_16_digit_app_password
-BANK_EMAIL=bank_email@gmail.com
-Download dataset: https://www.kaggle.com/mlg-ulb/creditcardfraud
+- **Secure Configuration**
+  - Environment variables (`.env`)
+  - Email credentials excluded from version control
+  ##  Decision Threshold Logic
+
+| Model | Safe | Suspicious | Fraud |
+|-------|------|------------|--------|
+| **XGBoost** | Prob < 0.15 | 0.15 ≤ Prob < 0.83 | Prob ≥ 0.83 |
+| **Random Forest** | Prob < 0.10 | 0.10 ≤ Prob < 0.36 | Prob ≥ 0.36 |
