@@ -1,62 +1,89 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="card shadow-sm border-0 p-4" dir="rtl" style="text-align: right;">
+<div class="container py-5">
+    <div class="card shadow-sm border-0 rounded-1 p-5" style="border-top: 4px solid #003366 !important;">
 
-    <!-- عنوان المشروع -->
-    <h2 class="text-primary fw-bold mb-3 text-center">
-        نظام ذكي للكشف المبكر عن عمليات الاحتيال<br>
-        في معاملات بطاقات الائتمان
-    </h2>
-
-    <h5 class="text-center text-muted mb-4" dir="ltr">
-        A Smart Early Detection System for Credit Card Fraud Transactions
-    </h5>
-
-    <!-- معلومات أكاديمية -->
-    <div class="row mb-4">
-        <div class="col-md-6">
-            <p class="mb-1"><strong>اسم الطالبة:</strong> البتول محمد أنور علي</p>
-            <p class="mb-1"><strong>الاختصاص:</strong> ماجستير علوم الحاسوب</p>
-            <p class="mb-1"><strong>الجامعة:</strong> الجامعة الافتراضية السورية</p>
+        <div class="row mb-5 align-items-center">
+            <div class="col-md-8">
+                <h1 class="fw-bold text-dark mb-1" style="letter-spacing: -0.5px;">
+                    Intelligent Early Fraud Detection System
+                </h1>
+                <p class="text-muted text-uppercase small fw-semibold ls-wide">
+                    Master in Computer Science(MCS) &middot; Research Thesis &middot; S25
+                </p>
+            </div>
+            <div class="col-md-4 text-md-end border-start border-2">
+                <div class="ps-3">
+                    <p class="mb-0 fw-bold text-dark">Researcher: albatoul_284575</p>
+                    <p class="mb-0 text-secondary small">Syrian Virtual University</p>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6">
-            <p class="mb-1"><strong>اسم المشرف:</strong> د. عصام سلمان</p>
-            <p class="mb-1"><strong>الفصل:</strong> S25</p>
+
+        <div class="mb-5">
+            <h5 class="text-primary fw-bold text-uppercase small mb-3">Executive Summary</h5>
+            <p class="fs-5 text-dark" style="text-align: justify; line-height: 1.7;">
+                The rapid expansion of global digital payment infrastructure has necessitated advanced countermeasures against financial crime. Traditional rule-based security protocols are increasingly insufficient to address the dynamic nature of modern fraud patterns. This project proposes a <strong>Machine Learning-driven framework</strong> designed to provide real-time risk assessment and early detection for credit card transactions.
+            </p>
         </div>
+
+        <hr class="my-5">
+
+        <div class="row g-5">
+            <div class="col-lg-7">
+                <h5 class="text-primary fw-bold text-uppercase small mb-3">Methodology & Modeling</h5>
+                <p class="text-secondary" style="text-align: justify;">
+                    The primary objective of this research is to evaluate the efficacy of supervised learning in high-dimensional financial datasets. The core production model utilizes <strong>Extreme Gradient Boosting (XGBoost)</strong>, selected for its superior predictive accuracy and computational efficiency.
+                </p>
+                <p class="text-secondary" style="text-align: justify;">
+                    To address the critical <strong>Class Imbalance Problem</strong>—where fraudulent instances represent a significant minority of total data—this research incorporates <strong>SMOTE (Synthetic Minority Over-sampling Technique)</strong>. This ensures the model maintains high sensitivity to fraud without escalating the false-positive rate, a crucial balance for maintaining consumer trust in banking environments.
+                </p>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="p-4 bg-light border-0 rounded-1">
+                    <h6 class="fw-bold mb-3 text-dark">Technical Framework</h6>
+                    <table class="table table-sm table-borderless mb-0 small">
+                        <tbody>
+                            <tr class="border-bottom">
+                                <td class="py-2 fw-bold text-dark">Primary Model</td>
+                                <td class="py-2 text-secondary text-end">XGBoost</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="py-2 fw-bold text-dark">Ensemble Method</td>
+                                <td class="py-2 text-secondary text-end">Random Forest</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="py-2 fw-bold text-dark">Sampling Logic</td>
+                                <td class="py-2 text-secondary text-end">SMOTE Integration</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="py-2 fw-bold text-dark">Interface</td>
+                                <td class="py-2 text-secondary text-end">Decision Support System</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 fw-bold text-dark">Environment</td>
+                                <td class="py-2 text-secondary text-end">Python / Scikit-Learn</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5 pt-4 border-top">
+            <h5 class="text-primary fw-bold text-uppercase small mb-3">Operational Objective</h5>
+            <p class="text-secondary mb-0" style="text-align: justify;">
+                Designed as a <strong>Decision Support System (DSS)</strong>, this platform provides authorized fraud analysts with immediate probability scoring. The system is intended to augment human expertise, streamlining the investigation process by identifying high-risk signals that warrant manual review. This prototype serves as a bridge between academic machine learning research and practical financial risk management.
+            </p>
+        </div>
+
     </div>
-
-    <hr class="mb-4">
-
-    <!-- المقدمة -->
-    <p class="fs-5" style="text-align: justify;">
-        مع التوسع الكبير في استخدام بطاقات الائتمان ووسائل الدفع الإلكتروني، ازدادت بشكل ملحوظ
-        محاولات الاحتيال المالي، مما شكّل تحدياً حقيقياً أمام المصارف والمؤسسات المالية.
-        تعتمد العديد من الأنظمة التقليدية في كشف الاحتيال على قواعد ثابتة أو مراجعات يدوية،
-        الأمر الذي يجعلها أقل قدرة على اكتشاف الأساليب الاحتيالية المتطورة والمتغيرة باستمرار.
-    </p>
-
-    <p class="fs-5" style="text-align: justify;">
-        من هنا تبرز أهمية استخدام تقنيات <strong>تعلم الآلة</strong> في تحليل بيانات المعاملات المالية
-        واكتشاف الأنماط غير الطبيعية التي قد تشير إلى وجود نشاط احتيالي.
-        حيث تتيح خوارزميات التصنيف الحديثة القدرة على معالجة كميات كبيرة من البيانات
-        والتعلم من السلوكيات السابقة للتفرقة بين المعاملات النظامية والمعاملات الاحتيالية.
-    </p>
-
-    <p class="fs-5" style="text-align: justify;">
-        يهدف هذا المشروع إلى تصميم وتطوير <strong>نظام ذكي للكشف المبكر عن عمليات الاحتيال
-        في معاملات بطاقات الائتمان</strong>، يعتمد على مجموعة من خوارزميات تعلم الآلة،
-        مثل الانحدار اللوجستي، أشجار القرار، والغابة العشوائية، مع معالجة مشكلة عدم توازن البيانات
-        باستخدام تقنيات متقدمة مثل <strong>SMOTE</strong>.
-    </p>
-
-    <p class="fs-5" style="text-align: justify;">
-        يوفّر النظام واجهة ويب تفاعلية تمكّن المستخدم من إدخال بيانات المعاملات
-        والحصول على تنبؤ فوري حول احتمالية كون المعاملة احتيالية أو نظامية،
-        مما يجعله أداة داعمة لاتخاذ القرار وليست بديلاً عن التقييم البشري النهائي.
-        ويُعد هذا النظام نموذجاً تعليمياً يمكن تطويره مستقبلاً ودمجه في بيئات عمل حقيقية.
-    </p>
-
+    
+    <div class="mt-4 text-center">
+        <p class="text-muted small">© 2025 Syrian Virtual University | Master in Computer Science</p>
+    </div>
 </div>
 
 {% endblock %}
