@@ -32,9 +32,12 @@ This project is a comprehensive Machine Learning web application built with Flas
    pip install -r requirements.txt
 
 
-   # create .env:
+    create .env:
+
+
    EMAIL_USER=user_email@gmail.com  
    BANK_EMAIL=bank_email@gmail.com
+   
    EMAIL_PASS=the_16_digit_app_password
 
 
