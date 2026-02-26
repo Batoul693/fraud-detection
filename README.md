@@ -30,11 +30,19 @@ This project is a comprehensive Machine Learning web application built with Flas
 | **Random Forest** | Prob < 0.10 | 0.10 ≤ Prob < 0.36 | Prob ≥ 0.36 |
 ## Installation & Setup
    pip install -r requirements.txt
+
+
    create .env:
+
+
    EMAIL_USER=user_email@gmail.com 
    EMAIL_PASS=the_16_digit_app_password 
    BANK_EMAIL=bank_email@gmail.com
+
+
    Email credentials  are documented in the report
+
+   
    Download dataset: https://www.kaggle.com/mlg-ulb/creditcardfraud
 ## Running the App 
     python app.py
