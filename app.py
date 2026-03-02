@@ -54,7 +54,7 @@ Internal Risk Monitoring Unit
 
 
 
-app = Flask("Fraud Detection System")
+app = Flask("__name__")
 app.secret_key = 'admin_secret_key_123'
 
 # ===================== LOAD DATA & MODELS =====================
