@@ -47,4 +47,4 @@ This project is a comprehensive Machine Learning web application built with Flas
    Download dataset: https://www.kaggle.com/mlg-ulb/creditcardfraud
 ## Running the App 
     python app.py
-    Then open http://127.0.0.1:5000 in your browser.
+    
