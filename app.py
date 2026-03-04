@@ -62,9 +62,9 @@ DATA_DIR = 'data'
 try:
     scaler = joblib.load('scaler.pkl')
     rf_model = joblib.load('random_forest_final.pkl')
-    xgb_model = joblib.load('xgboost_model_without_smote.pkl')
+    xgb_model = joblib.load('XGboost_model_without_smote.pkl')
     rf_threshold = joblib.load('rf_threshold.pkl')
-    xgb_threshold = joblib.load('xgboost_best_threshold.pkl')
+    xgb_threshold = joblib.load('XGboost_best_threshold.pkl')
     risk_map_df = pd.read_csv('data/hourly_fraud_risk_map.csv')
     RISK_MAP = risk_map_df.set_index('Hour')['Class'].to_dict()
 
